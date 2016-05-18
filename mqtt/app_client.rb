@@ -1,8 +1,6 @@
 # 电桩服务器订阅接受机器Topic
 require 'mqtt'
 
-# client = MQTT::Client.connect('mqtt://root:password@139.196.180.176', 1883)
-
 client = MQTT::Client.new
 client.host = '127.0.0.1'
 
