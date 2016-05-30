@@ -10,5 +10,10 @@ SneakersPacker.configure do |conf|
 end
 
 # SneakersPacker.publish("demo", "hello world")
+hash = {c: 1, d:1}
+message = SneakersPacker.remote_call("rpc_server", hash)
 
-puts SneakersPacker.remote_call("rpc_server", '34567890poikjhbtghjm')
+puts message.class
+puts message
+puts message[:a]
+puts message['a']
