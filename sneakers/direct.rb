@@ -2,9 +2,8 @@ require File.expand_path('../boot.rb', __FILE__)
 
 class Processor
   include Sneakers::Worker
-  from_queue :information_id,
-              exchange: 'i_am_direct',
-              exchange_type: :direct
+
+  from_queue :information_id
 
   def work(msg)
     puts msg
@@ -12,3 +11,5 @@ class Processor
     ack!
   end
 end
+
+# sneakers work Processor --require sneakers/direct.rb

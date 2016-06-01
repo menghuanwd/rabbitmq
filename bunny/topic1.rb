@@ -1,14 +1,28 @@
-require "bunny"
+require 'bunny'
 
 conn = Bunny.new
 conn.start
 
 channel = conn.create_channel
 
-payload = "Hello, Guyifeng!"
+exchange = channel.topic('logs_exchange', durable: true)
 
-exchange = channel.topic("i_am_topic", durable: true)
+# payload = 'I find a error elasticsearch bug!'
+# exchange.publish(payload, routing_key: 'error.elasticsearch')
+#
+# payload = 'I find a error mongodb bug!'
+# exchange.publish(payload, routing_key: 'error.mongodb')
+#
+# payload = 'I find a error mongodb bug now!'
+# exchange.publish(payload, routing_key: 'error.mongodb.now')
+#
+# payload = 'I find a info elasticsearch bug!'
+# exchange.publish(payload, routing_key: 'info.elasticsearch')
+#
+# payload = 'I find a info mongodb bug!'
+# exchange.publish(payload, routing_key: 'info.mongodb')
 
-exchange.publish(payload, :routing_key => "topic.guyifeng")
+payload = 'elasticsearch mongodb!'
+exchange.publish(payload, routing_key: 'elasticsearch.mongodb', persistent: true)
 
 conn.stop

@@ -11,9 +11,12 @@ client.connect
 client.subscribe('machine-gu')
 
 client.get do |topic, message|
-  puts "#{topic}  #{message}"
+  p "#{topic}  #{message} #{message.class} #{message['a']}"
+  p message
+  p Hash[message][:a]
+  p Hash[message][:b]
 
-  sleep 10
+  # sleep 10
   if message == 'open lock'
     client.publish('machine-response', 'has opened lock')
   end
@@ -21,4 +24,3 @@ end
 
 # 断开连接
 # client.disconnect
-

@@ -13,9 +13,9 @@ puts client.keep_alive
 # ping
 puts client.ping
 
+hash = { a: 1, b: 'a' }
 # 发送数据
-client.publish('machine-gu', 'data1,data2,data3')
+client.publish('machine-gu', hash)
 
 # 断开连接
 # client.disconnect
-

@@ -1,12 +1,11 @@
-require "bunny"
+require 'bunny'
 
 conn = Bunny.new
 conn.start
 
-ch   = conn.create_channel
+ch = conn.create_channel
 
 class FibonacciServer
-
   def initialize(ch)
     @ch = ch
   end
@@ -15,11 +14,11 @@ class FibonacciServer
     @q = @ch.queue(queue_name)
     @x = @ch.default_exchange
 
-    @q.subscribe(:block => true) do |delivery_info, properties, payload|
+    @q.subscribe(block: true) do |_delivery_info, properties, payload|
       n = payload.to_i
       r = self.class.fib(n)
 
-      @x.publish(r.to_s, :routing_key => properties.reply_to, :correlation_id => properties.correlation_id)
+      @x.publish(r.to_s, routing_key: properties.reply_to, correlation_id: properties.correlation_id)
     end
   end
 
@@ -35,8 +34,8 @@ end
 
 begin
   server = FibonacciServer.new(ch)
-  " [x] Awaiting RPC requests"
-  server.start("rpc_queue")
+  ' [x] Awaiting RPC requests'
+  server.start('rpc_queue')
 rescue Interrupt => _
   ch.close
   conn.close

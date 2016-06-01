@@ -9,6 +9,7 @@ class RpcServerWorker
 
   # return value of call will be result of remote procedure call
   def call(data)
+    # a =Time.now
     puts data
     # puts data.as_json
     puts data.class
@@ -18,6 +19,7 @@ class RpcServerWorker
     # data.to_i ** 3
     # sleep 4
     'ok'
-    {a: 1, b:2}
+    # puts Time.now - a
+    { a: 1, b: 2 }
   end
 end

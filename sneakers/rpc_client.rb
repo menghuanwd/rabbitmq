@@ -6,12 +6,15 @@ require 'SecureRandom'
 
 SneakersPacker.configure do |conf|
   conf.rpc_timeout = 5             # rpc client timeout. default is 5 seconds.
-  conf.app_name = "sneakers_test"  # rpc client or server app's name. default is 'unknown'
+  conf.app_name = 'sneakers_test'  # rpc client or server app's name. default is 'unknown'
 end
 
 # SneakersPacker.publish("demo", "hello world")
-hash = {c: 1, d:1}
-message = SneakersPacker.remote_call("rpc_server", hash)
+hash = { c: 1, d: 1 }
+message = SneakersPacker.remote_call('ios_push', hash)
+a = Time.now
+# message = SneakersPacker.remote_call("rpc_server", hash)
+puts Time.now - a
 
 puts message.class
 puts message
