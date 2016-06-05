@@ -1,6 +1,7 @@
 require 'bunny'
 
 conn = Bunny.new
+# conn = Bunny.new(vhost: 'machine', user: 'linjian', password: 'password')
 conn.start
 
 channel = conn.create_channel

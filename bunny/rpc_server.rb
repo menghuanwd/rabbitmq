@@ -19,6 +19,8 @@ class FibonacciServer
       r = self.class.fib(n)
 
       @x.publish(r.to_s, routing_key: properties.reply_to, correlation_id: properties.correlation_id)
+
+      puts "finished"
     end
   end
 
@@ -34,8 +36,9 @@ end
 
 begin
   server = FibonacciServer.new(ch)
-  ' [x] Awaiting RPC requests'
+  puts ' [x] Awaiting RPC requests'
   server.start('rpc_queue')
+
 rescue Interrupt => _
   ch.close
   conn.close
